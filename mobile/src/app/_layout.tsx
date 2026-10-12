@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ToastHost } from '@/components/ui/toast';
 import { queryClient } from '@/lib/queries';
+import { isExpoGo } from '@/lib/runtime';
 import { usePrefs } from '@/state/prefs';
 import { useIsSignedIn, useSession } from '@/state/session';
 import { fontAssets } from '@/theme/fonts';
@@ -18,7 +19,8 @@ import { colors } from '@/theme/tokens';
 export const unstable_settings = { anchor: '(tabs)' };
 
 SplashScreen.preventAutoHideAsync().catch(() => undefined);
-SplashScreen.setOptions({ duration: 450, fade: true });
+// The splash cross-fade needs a real build; Expo Go doesn't support customizing it.
+if (!isExpoGo) SplashScreen.setOptions({ duration: 450, fade: true });
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);

@@ -1,8 +1,8 @@
 import { Directory, File, Paths } from 'expo-file-system';
 import { ImageManipulator, SaveFormat } from 'expo-image-manipulator';
-import { Asset, requestPermissionsAsync } from 'expo-media-library';
 import * as Sharing from 'expo-sharing';
 
+import { isExpoGo } from './runtime';
 import { shareText } from './share';
 
 // Native implementation — image.web.ts covers the web dev preview.
@@ -29,13 +29,30 @@ async function download(url: string, name: string): Promise<File> {
   return File.downloadFileAsync(url, target);
 }
 
+/**
+ * Add a local file to the photo library. Store and development builds use the current class-based
+ * API; Expo Go doesn't ship that native module, so it uses the legacy API (same result). Both
+ * are imported lazily so merely loading this file can't crash inside Expo Go.
+ */
+async function addToPhotos(localUri: string): Promise<boolean> {
+  if (isExpoGo) {
+    const LegacyMediaLibrary = await import('expo-media-library/legacy');
+    const perm = await LegacyMediaLibrary.requestPermissionsAsync(true, ['photo']);
+    if (!perm.granted) return false;
+    await LegacyMediaLibrary.saveToLibraryAsync(localUri);
+    return true;
+  }
+  const MediaLibrary = await import('expo-media-library');
+  const perm = await MediaLibrary.requestPermissionsAsync(true, ['photo']);
+  if (!perm.granted) return false;
+  await MediaLibrary.Asset.create(localUri);
+  return true;
+}
+
 /** Save a remote image (e.g. a Memoria Viva portrait) to the photo library. */
 export async function saveImageToLibrary(url: string, name = `tequila-town-${Date.now()}.jpg`): Promise<'saved' | 'denied'> {
-  const perm = await requestPermissionsAsync(true, ['photo']);
-  if (!perm.granted) return 'denied';
   const file = await download(url, name);
-  await Asset.create(file.uri);
-  return 'saved';
+  return (await addToPhotos(file.uri)) ? 'saved' : 'denied';
 }
 
 /** Share the image file itself (falls back to a link). */
