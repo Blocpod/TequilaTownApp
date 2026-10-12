@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedReaction,
@@ -22,7 +22,7 @@ const VISIBLE = 5;
 
 type Item = { value: string; label: string };
 
-function Row({ item, index, offset }: { item: Item; index: number; offset: SharedValue<number> }) {
+function Row({ item, index, offset, onSelect }: { item: Item; index: number; offset: SharedValue<number>; onSelect: (i: number) => void }) {
   const style = useAnimatedStyle(() => {
     const d = Math.abs(offset.get() / ITEM_H - index);
     return {
@@ -30,12 +30,15 @@ function Row({ item, index, offset }: { item: Item; index: number; offset: Share
       transform: [{ scale: interpolate(d, [0, 1, 2], [1, 0.9, 0.8], 'clamp') }, { rotateX: `${interpolate(offset.get() / ITEM_H - index, [-2, 0, 2], [50, 0, -50], 'clamp')}deg` }],
     };
   });
+  // Tapping a row jumps straight to it (a drag still scrolls the wheel).
   return (
-    <Animated.View style={[styles.row, style]}>
-      <Text style={styles.rowText} numberOfLines={1}>
-        {item.label}
-      </Text>
-    </Animated.View>
+    <Pressable onPress={() => onSelect(index)} accessible={false}>
+      <Animated.View style={[styles.row, style]}>
+        <Text style={styles.rowText} numberOfLines={1}>
+          {item.label}
+        </Text>
+      </Animated.View>
+    </Pressable>
   );
 }
 
@@ -132,6 +135,9 @@ export function WheelPicker({ items, value, onChange, label, style }: Props) {
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
+        // Android only scrolls a vertical list inside another vertical scroller when told to.
+        nestedScrollEnabled
+        overScrollMode="never"
         snapToInterval={ITEM_H}
         decelerationRate="fast"
         onMomentumScrollEnd={(e) => settle(e.nativeEvent.contentOffset.y)}
@@ -141,7 +147,16 @@ export function WheelPicker({ items, value, onChange, label, style }: Props) {
         contentContainerStyle={{ paddingVertical: ITEM_H * Math.floor(VISIBLE / 2) }}
       >
         {items.map((item, i) => (
-          <Row key={item.value} item={item} index={i} offset={offset} />
+          <Row
+            key={item.value}
+            item={item}
+            index={i}
+            offset={offset}
+            onSelect={(idx) => {
+              haptic.tap();
+              commit(idx);
+            }}
+          />
         ))}
       </Animated.ScrollView>
     </View>
