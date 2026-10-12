@@ -1,0 +1,8 @@
+node_modules/
+.netlify/
+.env
+.env.*
+!.env.example
+# Output of `npm run qr` (signed venue QR sheets — treat as sensitive print artwork)
+qr-codes/
+*.log

@@ -1,0 +1,6 @@
+# /m/ (shared portraits) and /s/ (QR landings) stay crawlable so link previews
+# work (Twitterbot honors robots.txt); they opt out of search via noindex instead.
+# /api/media/ must stay fetchable: it serves the og:image for shared portraits.
+User-agent: *
+Allow: /api/media/
+Disallow: /api/

@@ -1,0 +1,551 @@
+/* Tequila Town — vintage paper / letterpress web styles (shared by every page,
+   including the server-rendered /m and /s share pages). */
+
+@font-face {
+  font-family: 'Tequila Town';
+  src: url('/fonts/TEQUILATOWN.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  --orange: #ad3a00;
+  --orange-deep: #8a2e00;
+  --blush: #fcc8ba;
+  --paper: #f3e9d2;
+  --paper-light: #fbf4e4;
+  --ink: #2b1a10;
+  --ink-soft: #5a4636;
+  --agave: #4f7a5e;
+  --sky: #4aa7c5;
+  --sun: #f2a541;
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --radius: 4px;
+  --display: 'Tequila Town', 'Fraunces', Georgia, serif;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* paper grain: two offset dot fields + a soft vignette, no images */
+  background-image:
+    radial-gradient(rgba(43, 26, 16, 0.045) 1px, transparent 1.2px),
+    radial-gradient(rgba(173, 58, 0, 0.035) 1px, transparent 1.2px),
+    radial-gradient(ellipse at center, rgba(255, 250, 238, 0.65) 0%, rgba(243, 233, 210, 0) 70%);
+  background-size: 7px 7px, 11px 11px, 100% 100%;
+  background-position: 0 0, 3px 5px, center;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--orange);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--orange-deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.wrap {
+  width: min(100% - 2.5rem, 68rem);
+  margin-inline: auto;
+}
+.wrap-narrow {
+  width: min(100% - 2.5rem, 44rem);
+  margin-inline: auto;
+}
+
+/* ---- header / footer ---------------------------------------------------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper-light);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.75rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand img {
+  width: 44px;
+  height: 44px;
+}
+.brand span {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+}
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.site-nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-nav a:hover,
+.site-nav a[aria-current='page'] {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+.site-footer {
+  margin-top: 4rem;
+  border-top: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+.site-footer .wrap {
+  padding-block: 2rem;
+  display: grid;
+  gap: 1rem;
+}
+.site-footer a {
+  color: var(--blush);
+}
+.site-footer .links {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.site-footer .fine {
+  color: #d9c9a8;
+  margin: 0;
+}
+
+/* ---- type ---------------------------------------------------------------- */
+
+h1,
+h2,
+.display {
+  font-family: var(--display);
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  margin: 0 0 0.5rem;
+}
+h2 {
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  margin: 2.5rem 0 0.75rem;
+}
+h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 1.75rem 0 0.4rem;
+}
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--agave);
+  margin: 0 0 0.75rem;
+}
+.lede {
+  font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.muted {
+  color: var(--ink-soft);
+}
+
+/* ---- components ---------------------------------------------------------- */
+
+.card {
+  background: var(--paper-light);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--orange);
+  color: var(--blush);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.btn:hover {
+  color: #fff;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.btn-secondary {
+  background: var(--paper-light);
+  color: var(--ink);
+}
+.btn-secondary:hover {
+  color: var(--orange);
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--sun);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.notice {
+  border: 2px dashed var(--orange);
+  background: #fff3df;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+
+.stamp {
+  display: inline-block;
+  border: 3px double var(--orange);
+  color: var(--orange);
+  padding: 0.35rem 0.8rem;
+  font-family: var(--display);
+  letter-spacing: 0.08em;
+  transform: rotate(-4deg);
+}
+
+/* ---- landing ------------------------------------------------------------- */
+
+.hero {
+  padding-block: clamp(2.5rem, 7vw, 5rem) 1rem;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 800px) {
+  .hero {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+.hero-logo {
+  width: min(320px, 70vw);
+  margin-inline: auto;
+  filter: drop-shadow(8px 8px 0 var(--ink));
+}
+.meta-line {
+  font-family: var(--sans);
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.features {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  margin-top: 1.5rem;
+}
+.feature h3 {
+  margin-top: 0;
+  color: var(--orange);
+}
+.feature p {
+  margin: 0;
+}
+.feature .tag {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--agave);
+}
+
+/* ---- documents (privacy/terms/support) ---------------------------------- */
+
+.doc {
+  padding-block: 2.5rem;
+}
+.doc h1 {
+  font-size: clamp(2.2rem, 7vw, 3.6rem);
+}
+.doc h2 {
+  font-size: clamp(1.35rem, 3.6vw, 1.8rem);
+}
+.doc ul {
+  padding-left: 1.25rem;
+}
+.doc li {
+  margin-bottom: 0.35rem;
+}
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  margin: 1rem 0;
+}
+.doc th,
+.doc td {
+  text-align: left;
+  vertical-align: top;
+  border: 1.5px solid var(--ink);
+  padding: 0.55rem 0.7rem;
+}
+.doc th {
+  background: var(--blush);
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+}
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.75rem;
+  margin-bottom: 0.9rem;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--sun);
+  display: grid;
+  place-items: center;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+details {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-light);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ---- share pages ----------------------------------------------------------- */
+
+.share {
+  padding-block: 2rem 1rem;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .share {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+.photo-frame {
+  background: #fffaf0;
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+  padding: clamp(0.75rem, 3vw, 1.25rem) clamp(0.75rem, 3vw, 1.25rem) clamp(2.5rem, 7vw, 3.5rem);
+  transform: rotate(-1.2deg);
+  max-width: 34rem;
+  margin-inline: auto;
+}
+.photo-frame img {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  background: #e9dcc0;
+}
+.photo-frame figcaption {
+  margin-top: 0.9rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.code-chip {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.4rem;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: clamp(0.85rem, 3.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid var(--ink);
+  background: var(--blush);
+  border-radius: var(--radius);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+  .photo-frame,
+  .stamp {
+    transform: none;
+  }
+}
+
+/* ---- utilities (pages use classes, never inline styles — CSP) ------------ */
+.center {
+  text-align: center;
+}
+.center .btn-row {
+  justify-content: center;
+}
+.left {
+  text-align: left;
+}
+.left .btn-row {
+  justify-content: flex-start;
+}
+.mt {
+  margin-top: 2rem;
+}
+.small {
+  font-size: 0.9rem;
+}
+.flush {
+  margin-top: 0;
+}
+
+/* ---- small screens --------------------------------------------------------- */
+.brand span {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .site-header .wrap {
+    gap: 0.75rem;
+  }
+  .brand {
+    gap: 0.5rem;
+  }
+  .brand img {
+    width: 36px;
+    height: 36px;
+  }
+  .brand span {
+    font-size: 1.05rem;
+  }
+  .site-nav {
+    gap: 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+@media (max-width: 420px) {
+  /* The round logo already reads "Tequila Town": keep the wordmark for screen readers only. */
+  .brand span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+  .brand img {
+    width: 42px;
+    height: 42px;
+  }
+}
