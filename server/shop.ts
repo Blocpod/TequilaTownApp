@@ -42,7 +42,7 @@ export function priceItems(raw: unknown): { items: Order['items']; total: number
     const product = typeof input.productId === 'string' ? productById(input.productId) : undefined;
     if (!product) throw badRequest(`items[${i}]: unknown product`, { field: 'items', index: i });
     if (product.action !== 'reserve') {
-      throw badRequest(`${product.name} can't be reserved — use ${product.action === 'waitlist' ? 'the waitlist' : 'a request'} instead`, {
+      throw badRequest(`${product.name} can't be reserved. Use ${product.action === 'waitlist' ? 'the waitlist' : 'a request'} instead`, {
         field: 'items',
         index: i,
         productId: product.id,
@@ -90,7 +90,7 @@ async function reservePickupCode(svc: Services, userId: string, orderId: string)
     const res = await shop.setJSON(pickupKey(code), { userId, orderId }, { onlyIfNew: true });
     if (res.modified) return code;
   }
-  throw new ApiError('CONFLICT', 'Could not allocate a pickup code — please try again');
+  throw new ApiError('CONFLICT', 'Could not allocate a pickup code. Please try again');
 }
 
 export async function createOrder(ctx: Ctx): Promise<Response> {
@@ -128,7 +128,7 @@ export async function createOrder(ctx: Ctx): Promise<Response> {
 function checkLimits(orders: OrderRecord[], items: Order['items']) {
   const active = orders.filter((o) => o.status === 'reserved');
   if (active.length >= MAX_ACTIVE_RESERVATIONS) {
-    throw new ApiError('LIMIT_REACHED', `You can hold up to ${MAX_ACTIVE_RESERVATIONS} reservations at a time — pick one up or cancel one first`, {
+    throw new ApiError('LIMIT_REACHED', `You can hold up to ${MAX_ACTIVE_RESERVATIONS} reservations at a time. Pick one up or cancel one first`, {
       status: 409,
       details: { maxActive: MAX_ACTIVE_RESERVATIONS },
     });
@@ -139,7 +139,7 @@ function checkLimits(orders: OrderRecord[], items: Order['items']) {
     const held = active.flatMap((o) => o.items).filter((i) => i.productId === item.productId).reduce((s, i) => s + i.qty, 0);
     const wanted = items.filter((i) => i.productId === item.productId).reduce((s, i) => s + i.qty, 0);
     if (held + wanted > p.limit) {
-      throw new ApiError('LIMIT_REACHED', `Limit ${p.limit} per guest for ${p.name} — you already have ${held} reserved`, {
+      throw new ApiError('LIMIT_REACHED', `Limit ${p.limit} per guest for ${p.name}. You already have ${held} reserved`, {
         status: 409,
         details: { productId: p.id, limit: p.limit, reserved: held },
       });

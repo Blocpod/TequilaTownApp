@@ -162,7 +162,7 @@ export async function verifyAccessToken(cfg: Config, token: string, now: Date): 
     if (typeof payload.sub !== 'string' || !payload.sub) throw new Error('missing sub');
     return { sub: payload.sub, ver: typeof payload.ver === 'number' ? payload.ver : 0 };
   } catch (e) {
-    if (e instanceof joseErrors.JWTExpired) throw new ApiError('TOKEN_EXPIRED', 'Access token expired — refresh your session');
+    if (e instanceof joseErrors.JWTExpired) throw new ApiError('TOKEN_EXPIRED', 'Access token expired. Refresh your session');
     throw new ApiError('UNAUTHORIZED', 'Invalid access token');
   }
 }
@@ -174,7 +174,7 @@ export async function authenticate(svc: Services, req: Request): Promise<UserRec
   const claims = await verifyAccessToken(svc.config, token, svc.now());
   const user = await getUser(svc, claims.sub);
   if (!user) throw new ApiError('UNAUTHORIZED', 'Account not found');
-  if ((user.sessionVersion ?? 0) !== claims.ver) throw new ApiError('UNAUTHORIZED', 'Session was signed out — please sign in again');
+  if ((user.sessionVersion ?? 0) !== claims.ver) throw new ApiError('UNAUTHORIZED', 'Session was signed out. Please sign in again');
   return user;
 }
 
@@ -284,7 +284,7 @@ export async function signup(ctx: PublicCtx): Promise<Response> {
   const id = randomUUID();
   const passwordHash = await hashPassword(password, svc.config.scryptN);
   if (!(await claimIndex(svc, emailIndexKey(email), id))) {
-    throw new ApiError('EMAIL_TAKEN', 'An account with this email already exists — try signing in');
+    throw new ApiError('EMAIL_TAKEN', 'An account with this email already exists. Try signing in');
   }
   const user = newUserRecord(now, { id, email, name, providers: ['password'], passwordHash });
   await svc.store.ns('users').setJSON(id, user, { onlyIfNew: true });
@@ -310,7 +310,7 @@ export async function login(ctx: PublicCtx): Promise<Response> {
   const fails = await tokens.getJSON<LoginFailures>(failKey);
   if (fails && now - fails.value.windowStart < LOGIN_WINDOW_MS && fails.value.count >= LOGIN_MAX_FAILURES) {
     const retry = Math.ceil((fails.value.windowStart + LOGIN_WINDOW_MS - now) / 1000);
-    throw new ApiError('RATE_LIMITED', 'Too many sign-in attempts — please wait a few minutes or reset your password', {
+    throw new ApiError('RATE_LIMITED', 'Too many sign-in attempts. Please wait a few minutes or reset your password', {
       headers: { 'retry-after': String(retry) },
       details: { retryAfterSeconds: retry },
     });
@@ -346,7 +346,7 @@ export async function appleSignIn(ctx: PublicCtx): Promise<Response> {
     claims = await svc.verifyAppleToken(body.identityToken, svc.config.appleBundleIds);
   } catch (e) {
     svc.log.warn('auth.apple.invalid_token', { reason: e instanceof Error ? e.message : String(e), requestId: ctx.requestId });
-    throw new ApiError('UNAUTHORIZED', 'Apple sign-in could not be verified — please try again');
+    throw new ApiError('UNAUTHORIZED', 'Apple sign-in could not be verified. Please try again');
   }
   const now = svc.now();
   const appleKey = appleIndexKey(claims.sub);
@@ -404,7 +404,7 @@ export async function refresh(ctx: PublicCtx): Promise<Response> {
   const hash = sha256hex(body.refreshToken);
   const tokens = svc.store.ns('tokens');
   const cur = await tokens.getJSON<RefreshRecord & { rotatedAt?: number }>(refreshKey(hash));
-  const expired = new ApiError('UNAUTHORIZED', 'Your session has expired — please sign in again');
+  const expired = new ApiError('UNAUTHORIZED', 'Your session has expired. Please sign in again');
   if (!cur || cur.value.rotatedAt || cur.value.expiresAt <= svc.now().getTime()) {
     if (cur) await tokens.delete(refreshKey(hash));
     throw expired;
@@ -447,7 +447,7 @@ const codeHash = (secret: string, userId: string, code: string) =>
   createHmac('sha256', secret).update(`reset:${userId}:${code}`).digest('hex');
 
 function requireResetConfigured(cfg: Config) {
-  if (!passwordResetEnabled(cfg)) throw new ApiError('NOT_CONFIGURED', 'Password reset by email is not available — contact support');
+  if (!passwordResetEnabled(cfg)) throw new ApiError('NOT_CONFIGURED', 'Password reset by email is not available. Please contact support');
 }
 
 export async function forgotPassword(ctx: PublicCtx): Promise<Response> {
@@ -539,7 +539,7 @@ async function sendResetEmail(svc: Services, to: string, name: string, code: str
 <p style="margin:0 0 12px;font-size:17px">Hola ${first},</p>
 <p style="margin:0 0 20px;font-size:16px;line-height:1.5">Use this code to reset your Tequila Town password. It expires in 15 minutes.</p>
 <p style="margin:0 0 20px;font:700 34px/1 'Courier New',monospace;letter-spacing:8px;color:#AD3A00">${code}</p>
-<p style="margin:0;font-size:14px;line-height:1.5;color:#5a4636">If you didn't ask for this, you can ignore this email — your password won't change.</p>
+<p style="margin:0;font-size:14px;line-height:1.5;color:#5a4636">If you didn't ask for this, you can ignore this email. Your password won't change.</p>
 </td></tr></table></td></tr></table></body></html>`;
   const text = `Hola ${name.split(/\s+/)[0] || 'there'},\n\nYour Tequila Town password reset code is ${code}. It expires in 15 minutes.\n\nIf you didn't ask for this, ignore this email.`;
   try {

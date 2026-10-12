@@ -60,10 +60,10 @@ export function validateStepInput(step: MissionStep, input: Pick<CompleteStepReq
     if (typeof input.code !== 'string' || !input.code.trim()) throw new ApiError('INVALID_CODE', 'Scan the QR code at this spot to continue');
     const code = normalizeScanPayload(input.code);
     const slug = code ? verifyCode(code, qrSecret) : null;
-    if (!slug || slug !== step.code) throw new ApiError('INVALID_CODE', "That code doesn't belong to this step — find the right QR and try again");
+    if (!slug || slug !== step.code) throw new ApiError('INVALID_CODE', "That code doesn't belong to this step. Find the right QR and try again");
   } else if (step.type === 'quiz') {
     if (typeof input.answer !== 'number' || !Number.isInteger(input.answer)) throw badRequest('`answer` must be the index of the chosen option', { field: 'answer' });
-    if (input.answer !== step.answer) throw new ApiError('WRONG_ANSWER', 'Not quite — give it another try');
+    if (input.answer !== step.answer) throw new ApiError('WRONG_ANSWER', 'Not quite. Give it another try');
   }
 }
 

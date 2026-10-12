@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { Trophy } from 'lucide-react-native';
+import { ArrowRight, Trophy } from 'lucide-react-native';
 import { useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -75,13 +75,13 @@ export default function Passport() {
           <PrintCard radius={radii.lg} contentStyle={{ backgroundColor: colors.terracotta }}>
             <Image source={art.passportCover.source} style={{ width: '100%', aspectRatio: art.passportCover.width / art.passportCover.height }} contentFit="cover" />
           </PrintCard>
-          <SignInGate message="Your Tequila Town passport holds your stamps, points, level and ticket. It's free — and it unlocks the Oracle." />
+          <SignInGate message="Your Tequila Town passport holds your stamps, points, level and ticket. It's free, and it unlocks the Oracle." />
         </ScrollView>
       </View>
     );
   }
 
-  if (isLoading) return <LoadingState label="Opening your passport…" />;
+  if (isLoading) return <LoadingState label="Opening your passport" />;
   if (error || !data) return <ErrorState message={errorMessage(error)} onRetry={refetch} />;
 
   const { user, progress } = data;
@@ -112,7 +112,7 @@ export default function Passport() {
         <Animated.View entering={FadeInDown.springify()} style={{ paddingHorizontal: gutter }}>
           <PrintCard background={colors.cardWarm} shadowColor={colors.terracotta} contentStyle={{ padding: 0 }}>
             <View style={styles.pageHead}>
-              <Text style={styles.pageHeadText}>PASAPORTE · TEQUILA TOWN</Text>
+              <Text style={styles.pageHeadText}>PASAPORTE TEQUILA TOWN</Text>
               <Text style={styles.pageHeadText}>TQT</Text>
             </View>
             <View style={styles.dataRow}>
@@ -176,9 +176,12 @@ export default function Passport() {
           <PressCard onPress={() => router.push('/leaderboard')} background={colors.ink} shadowColor={colors.terracotta} accessibilityLabel="Open the leaderboard" contentStyle={styles.lb}>
             <Trophy size={22} color={colors.sun} />
             <Text style={styles.lbText}>HALL OF LEGENDS</Text>
-            <Text variant="small" color={colors.blush} style={{ marginLeft: 'auto' }}>
-              Leaderboard →
-            </Text>
+            <View style={styles.lbLink}>
+              <Text variant="small" color={colors.blush}>
+                Leaderboard
+              </Text>
+              <ArrowRight size={14} color={colors.blush} />
+            </View>
           </PressCard>
         </View>
 
@@ -196,7 +199,7 @@ export default function Passport() {
         <SectionHeader kicker="Scan, sip & explore" title="Missions" style={{ marginTop: 26 }} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: gutter, gap: 8, marginBottom: 14 }}>
           {FILTERS.map((f) => (
-            <Chip key={f.value} label={`${f.label} · ${f.value === 'all' ? views.length : views.filter((v) => v.status === f.value).length}`} selected={filter === f.value} onPress={() => setFilter(f.value)} />
+            <Chip key={f.value} label={`${f.label} (${f.value === 'all' ? views.length : views.filter((v) => v.status === f.value).length})`} selected={filter === f.value} onPress={() => setFilter(f.value)} />
           ))}
         </ScrollView>
         <View style={{ paddingHorizontal: gutter, gap: 12 }}>
@@ -243,6 +246,7 @@ const styles = StyleSheet.create({
   stat: { alignItems: 'center', gap: 2, minWidth: 90 },
   statValue: { fontFamily: fonts.serifBlack, fontSize: 24, lineHeight: 28, color: colors.ink, marginTop: 4 },
   lb: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, paddingVertical: 14 },
+  lbLink: { marginLeft: 'auto', flexDirection: 'row', alignItems: 'center', gap: 4 },
   lbText: { fontFamily: fonts.display, fontSize: 17, lineHeight: 19, letterSpacing: 1, color: colors.paper, marginTop: 2 },
   stampGrid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: gutter, columnGap: 18, rowGap: 8 },
   ledgerRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, gap: 12 },

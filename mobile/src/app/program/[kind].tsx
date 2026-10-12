@@ -16,7 +16,7 @@ import { artFor, type ArtKey } from '@/theme/art';
 import { colors, fonts, gutter, radii } from '@/theme/tokens';
 
 const KINDS: Record<string, { items: ProgramItem[]; title: string; kicker: string; blurb: string; hero: ArtKey; accent: string }> = {
-  food: { items: food, title: 'Food', kicker: 'Antojitos & more', blurb: 'Street stands, signature plates and something sweet — all within a few steps of a pour.', hero: 'heroFood', accent: colors.marigold },
+  food: { items: food, title: 'Food', kicker: 'Antojitos & more', blurb: 'Street stands, signature plates and something sweet, all within a few steps of a pour.', hero: 'heroFood', accent: colors.marigold },
   culture: { items: culture, title: 'Culture', kicker: 'Tradición viva', blurb: 'Jimadors, folklórico, artisans and 250 years of heritage.', hero: 'heroCulture', accent: colors.agave },
   music: { items: music, title: 'Music', kicker: 'From mariachi to midnight', blurb: 'Live performances and DJ sets from the first trumpet to the last song.', hero: 'heroMusic', accent: colors.terracotta },
 };
@@ -32,7 +32,7 @@ function Featured({ item, width }: { item: ProgramItem; width: number }) {
           {item.title.toUpperCase()}
         </Text>
         <Text variant="small">
-          {item.time} · {zone?.name}
+          {item.time} at {zone?.name}
         </Text>
       </View>
     </PressCard>

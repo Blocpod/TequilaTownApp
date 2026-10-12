@@ -51,7 +51,7 @@ export default function Product() {
   const add = () => {
     if (product.sizes && !size) return toast.error('Pick a size first');
     addToBag({ productId: product.id, qty, size }, product.limit);
-    toast.success('Added to your bag', `${qty} × ${product.name}${size ? ` (${size})` : ''}`);
+    toast.success('Added to your bag', `${product.name}${size ? ` (${size})` : ''}, quantity ${qty}`);
   };
 
   const request = async () => {
@@ -111,10 +111,10 @@ export default function Product() {
                 </View>
               ) : null}
               <View style={{ gap: 8 }}>
-                <Text variant="label">Quantity · limit {product.limit}</Text>
+                <Text variant="label">Quantity (limit {product.limit})</Text>
                 <Stepper value={qty} max={product.limit} onChange={setQty} label="Quantity" />
               </View>
-              <Button label={`Add to bag · $${(product.price * qty).toLocaleString()}`} icon={ShoppingBag} onPress={add} full />
+              <Button label={`Add to bag (${(product.price * qty).toLocaleString()})`} icon={ShoppingBag} onPress={add} full />
               <Text variant="small" align="center">
                 Pay when you pick up at the Mercado. Nothing is charged in the app.
               </Text>

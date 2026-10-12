@@ -33,5 +33,5 @@ export const music: ProgramItem[] = [
   { id: 'm3', title: 'Banda Sinaloense', description: 'Brass-heavy banda on the main stage.', time: '4:00 PM', experienceId: 'agave-after-dark', image: 'expCallesNoche', tag: 'Banda' },
   { id: 'm4', title: 'Cumbia Collective', description: 'Cumbia to keep the Mercado moving.', time: '6:00 PM', experienceId: 'mercado', image: 'expMercado', tag: 'Cumbia' },
   { id: 'm5', title: 'Sunset DJ Set', description: 'Golden-hour house in the cantina.', time: '7:00 PM', experienceId: 'cristalino-cantina', image: 'expCristalinoCantina', tag: 'House', featured: true },
-  { id: 'm6', title: 'DJ Agave', description: 'Headline set — drink to remember.', time: '8:00 PM', experienceId: 'agave-after-dark', image: 'expAgaveAfterDark', tag: 'Electronic', featured: true },
+  { id: 'm6', title: 'DJ Agave', description: 'Headline set. Drink to remember.', time: '8:00 PM', experienceId: 'agave-after-dark', image: 'expAgaveAfterDark', tag: 'Electronic', featured: true },
 ];

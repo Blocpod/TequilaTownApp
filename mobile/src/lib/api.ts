@@ -60,7 +60,7 @@ export function errorMessage(e: unknown, fallback = 'Something went wrong. Pleas
     case 'TIMEOUT':
       return 'That took too long. Please try again.';
     case 'RATE_LIMITED':
-      return 'Easy, amigo — too many tries. Give it a moment.';
+      return 'Easy, amigo. Too many tries, give it a moment.';
     default:
       return e.message || fallback;
   }

@@ -36,7 +36,7 @@ export async function reserveAi(ctx: Ctx, kind: AiKind): Promise<Reservation> {
   const { result } = await updateProgress(ctx.svc, ctx.user.id, (rec) => {
     const u = currentUsage(rec, now);
     if (u[kind] >= limit) {
-      throw new ApiError('LIMIT_REACHED', `You've used all ${limit} of today's ${LABELS[kind]} — the Oracle refills at midnight UTC`, {
+      throw new ApiError('LIMIT_REACHED', `You've used all ${limit} of today's ${LABELS[kind]}. The Oracle refills at midnight UTC`, {
         details: { kind, limit, resetsAt: nextUtcMidnight(now) },
       });
     }

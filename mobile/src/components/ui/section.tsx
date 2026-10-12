@@ -46,7 +46,7 @@ export function Ornament({ color = colors.ink, style }: { color?: string; style?
   return (
     <View style={[styles.ornament, style]} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
       <View style={[styles.rule, { backgroundColor: color }]} />
-      <Text style={{ color, fontSize: 14, marginHorizontal: 10 }}>✦</Text>
+      <View style={[styles.diamond, { backgroundColor: color }]} />
       <View style={[styles.rule, { backgroundColor: color }]} />
     </View>
   );
@@ -58,4 +58,5 @@ const styles = StyleSheet.create({
   actionText: { fontFamily: fonts.sansBold, fontSize: 13, letterSpacing: 0.4 },
   ornament: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: gutter },
   rule: { flex: 1, height: 1.2, opacity: 0.5 },
+  diamond: { width: 7, height: 7, marginHorizontal: 10, transform: [{ rotate: '45deg' }] },
 });

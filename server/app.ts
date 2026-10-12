@@ -225,7 +225,7 @@ export function createApp(deps: Deps): App {
           error: e instanceof Error ? e.message : String(e),
           stack: e instanceof Error ? e.stack : undefined,
         });
-        res = errorResponse(new ApiError('SERVER_ERROR', 'Something went wrong — please try again'));
+        res = errorResponse(new ApiError('SERVER_ERROR', 'Something went wrong. Please try again'));
       }
     }
     // Without waitUntil (tests, local scripts) background work completes before returning.

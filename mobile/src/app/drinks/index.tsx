@@ -45,7 +45,7 @@ function DrinkRow({ d, index, saved, onSave }: { d: Drink; index: number; saved:
             <Price level={d.price} />
           </View>
           <Text variant="small" numberOfLines={1}>
-            {d.tastingNotes.join(' · ')}
+            {d.tastingNotes.join(', ')}
           </Text>
         </View>
         <View style={{ width: 32 }} />
@@ -90,7 +90,7 @@ export default function DrinksGuide() {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }} style={{ marginHorizontal: -gutter }}>
               <View style={{ width: gutter - 8 }} />
               <Chip label="All" selected={filter === 'all'} onPress={() => setFilter('all')} />
-              <Chip label={`Saved · ${bookmarks.ids.length}`} icon={Bookmark} selected={filter === 'saved'} onPress={() => setFilter('saved')} />
+              <Chip label={`Saved (${bookmarks.ids.length})`} icon={Bookmark} selected={filter === 'saved'} onPress={() => setFilter('saved')} />
               {drinkCategories.map((c) => (
                 <Chip key={c.id} label={c.label} selected={filter === c.id} onPress={() => setFilter(c.id)} />
               ))}

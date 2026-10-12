@@ -64,7 +64,7 @@ export default function AgeGate() {
               Tequila Town is for guests {festival.ageMinimum} and over.
             </Text>
             <Text variant="body" align="center">
-              Come back and raise a glass with us when you&apos;re of legal drinking age. Until then — agua fresca is on us.
+              Come back and raise a glass with us when you&apos;re of legal drinking age. Until then, agua fresca is on us.
             </Text>
             <Button label="I entered it wrong" variant="secondary" size="md" onPress={() => setDenied(false)} style={{ alignSelf: 'center', marginTop: 8 }} />
           </Animated.View>
@@ -72,7 +72,7 @@ export default function AgeGate() {
           <View style={styles.body}>
             <Animated.View entering={FadeInDown.delay(220).springify()} style={{ gap: 6 }}>
               <Text variant="lede" align="center" color={colors.terracotta}>
-                Before we pour…
+                Before we pour
               </Text>
               <Text variant="heading" align="center" style={{ fontSize: 26, lineHeight: 32 }}>
                 Are you {festival.ageMinimum} or older?

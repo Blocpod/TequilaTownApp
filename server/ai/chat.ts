@@ -82,7 +82,7 @@ export async function chat(ctx: Ctx): Promise<Response> {
     await refundAi(svc, user.id, reservation);
     svc.log.error('ai.chat.upstream_failed', { userId: user.id, requestId: ctx.requestId, error: (e as Error).message });
     if (e instanceof AiUpstreamError && e.kind === 'refused') {
-      throw new ApiError('AI_REFUSED', "The Oracle can't help with that one — try asking another way");
+      throw new ApiError('AI_REFUSED', "The Oracle can't help with that one. Try asking another way");
     }
     throw toApiError(e);
   }
@@ -122,7 +122,7 @@ export async function chat(ctx: Ctx): Promise<Response> {
       } catch (e) {
         if (!clientGone) {
           svc.log.error('ai.chat.stream_failed', { userId: user.id, requestId: ctx.requestId, error: (e as Error).message, delivered });
-          send({ error: 'The Oracle lost the thread — please try again', code: 'AI_UNAVAILABLE' });
+          send({ error: 'The Oracle lost the thread. Please try again', code: 'AI_UNAVAILABLE' });
         }
         if (delivered === 0) await refundAi(svc, user.id, reservation);
       } finally {

@@ -13,7 +13,7 @@ export const festival = {
   // Local festival days (inclusive). Times are local to the venue.
   startDate: '2027-04-14T12:00:00-04:00',
   endDate: '2027-04-17T22:00:00-04:00',
-  dailyHours: '12 PM – 10 PM',
+  dailyHours: '12 PM to 10 PM',
   venue: 'Factory Town',
   ageMinimum: 21,
   supportEmail: 'support@tequilatown.com',

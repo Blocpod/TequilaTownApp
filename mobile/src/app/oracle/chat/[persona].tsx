@@ -166,7 +166,7 @@ export default function OracleChat() {
                 <TextInput
                   value={draft}
                   onChangeText={setDraft}
-                  placeholder={persona === 'cantinero' ? 'Ask for a pour or a cocktail…' : 'Ask about a dish or a pairing…'}
+                  placeholder={persona === 'cantinero' ? 'Ask for a pour or a cocktail' : 'Ask about a dish or a pairing'}
                   placeholderTextColor="rgba(243,233,210,0.4)"
                   style={styles.input}
                   multiline
@@ -187,7 +187,7 @@ export default function OracleChat() {
                 </PressableScale>
               </View>
               <Text style={styles.footnote}>
-                {thread.remaining !== null ? `${thread.remaining} messages left today · ` : ''}The Oracle encourages responsible drinking.
+                {thread.remaining !== null ? `${thread.remaining} messages left today. ` : ''}The Oracle encourages responsible drinking.
               </Text>
             </View>
           </>

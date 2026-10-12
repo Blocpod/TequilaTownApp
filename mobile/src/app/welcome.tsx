@@ -24,7 +24,7 @@ const SLIDES: { art: ArtKey; kicker: string; title: string; body: string; bg: st
     art: 'posterTown',
     kicker: 'Bienvenidos',
     title: 'Twelve zones.\nOne journey.',
-    body: 'From the agave fields to Agave After Dark — your map, schedule and guide to every room in Tequila Town.',
+    body: 'From the agave fields to Agave After Dark: your map, schedule and guide to every room in Tequila Town.',
     bg: colors.sun,
   },
   {
@@ -38,7 +38,7 @@ const SLIDES: { art: ArtKey; kicker: string; title: string; body: string; bg: st
     art: 'oracleMemoria',
     kicker: 'The Oracle',
     title: 'Meet the\nspirits.',
-    body: 'An AI bartender, a chef who knows every pairing, a bottle scanner — and a portrait studio that sends you back to 1940s Jalisco.',
+    body: 'An AI bartender, a chef who knows every pairing, a bottle scanner and a portrait studio that sends you back to 1940s Jalisco.',
     bg: colors.blush,
   },
 ];
@@ -141,8 +141,8 @@ export default function Welcome() {
           />
         ) : null}
         <Button label="I have an account" variant="secondary" onPress={() => router.push('/auth/sign-in')} full />
-        <PressableScale onPress={continueAsGuest} accessibilityLabel="Just browsing — continue without an account" style={{ alignSelf: 'center', padding: 8 }}>
-          <Text style={styles.browse}>Just browsing →</Text>
+        <PressableScale onPress={continueAsGuest} accessibilityLabel="Just browsing. Continue without an account" style={{ alignSelf: 'center', padding: 8 }}>
+          <Text style={styles.browse}>Just browsing</Text>
         </PressableScale>
       </Animated.View>
     </View>

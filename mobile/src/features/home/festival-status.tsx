@@ -25,7 +25,7 @@ const fmtRange = () => {
   const s = new Date(festival.startDate);
   const e = new Date(festival.endDate);
   const month = s.toLocaleString('en-US', { month: 'long' });
-  return `${month} ${s.getDate()}–${e.getDate()}, ${e.getFullYear()}`;
+  return `${month} ${s.getDate()} to ${e.getDate()}, ${e.getFullYear()}`;
 };
 
 /** "2:00 PM" → minutes since midnight */
@@ -65,7 +65,7 @@ export function FestivalStatus() {
     return (
       <PrintCard background={colors.ink} shadowColor={colors.terracotta} contentStyle={styles.pad}>
         <View style={styles.row}>
-          <Tag label={`Live · Day ${day}`} color={colors.terracotta} textColor={colors.card} />
+          <Tag label={`Live now, day ${day}`} color={colors.terracotta} textColor={colors.card} />
           <Text variant="small" color={colors.blush}>
             {festival.dailyHours}
           </Text>
@@ -79,7 +79,7 @@ export function FestivalStatus() {
               Up next
             </Text>
             <Text variant="subheading" color={colors.paper}>
-              {next.title} · {next.time}
+              {next.title} at {next.time}
             </Text>
           </PressableScale>
         ) : null}

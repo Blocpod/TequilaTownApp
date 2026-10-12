@@ -28,7 +28,7 @@ export const experiences: Experience[] = [
     subtitle: 'The Journey Begins',
     description: 'Begin your journey in the heart of the agave fields.',
     longDescription:
-      'Mirrors surrounded by agave plants invite you to physically — and metaphorically — reflect inward before the journey begins. Stand among the pencas, find your own reflection, and set the intention for the night.',
+      'Mirrors surrounded by agave plants invite you to physically, and metaphorically, reflect inward before the journey begins. Stand among the pencas, find your own reflection, and set the intention for the night.',
     image: 'expAgaveReflection',
     motion: 'motionAgaveReflection',
     sponsorId: 'jose-cuervo',
@@ -43,7 +43,7 @@ export const experiences: Experience[] = [
     subtitle: 'All Aboard',
     description: 'Ride the legendary tequila train through agave country.',
     longDescription:
-      'Ride through the agave fields of Jalisco, Mexico — taking you back to where the journey begins. Your welcome drink is poured as the landscape rolls by.',
+      'Ride through the agave fields of Jalisco, Mexico, taking you back to where the journey begins. Your welcome drink is poured as the landscape rolls by.',
     pour: 'Welcome drink',
     image: 'expEspirituTrain',
     sponsorId: '1800-tequila',
@@ -58,7 +58,7 @@ export const experiences: Experience[] = [
     subtitle: 'Back to the Roots',
     description: "Tour the world's oldest active tequila distillery.",
     longDescription:
-      "Discover how tequila's 18th-century roots shaped the spirit we love today — crafted with care, culture, and centuries of tradition. Copper stills, the raven, and your first sip.",
+      "Discover how tequila's 18th-century roots shaped the spirit we love today, crafted with care, culture and centuries of tradition. Copper stills, the raven, and your first sip.",
     pour: '1st sip + cocktail bar',
     image: 'expLaRojena',
     sponsorId: 'jose-cuervo',
@@ -73,7 +73,7 @@ export const experiences: Experience[] = [
     subtitle: 'Culture You Can Taste',
     description: 'Master the art of tequila tasting.',
     longDescription:
-      'Break the fourth wall of taste as you explore the notes, aromas, and sensations that define your personal flavor profile. Blanco, reposado, añejo — decoded.',
+      'Break the fourth wall of taste as you explore the notes, aromas, and sensations that define your personal flavor profile. Blanco, reposado and añejo, decoded.',
     pour: '2nd sip',
     image: 'expPaletteDecoder',
     motion: 'motionPaletteDecoder',
@@ -117,7 +117,7 @@ export const experiences: Experience[] = [
     subtitle: 'Streets at Night',
     description: 'The magic of Mexican streets after dark.',
     longDescription:
-      'With the night as our cover, we slip away from the family cave and onto the shadowy streets of Tequila — guitars, papel picado, and lanterns overhead.',
+      'With the night as our cover, we slip away from the family cave and onto the shadowy streets of Tequila, with guitars, papel picado and lanterns overhead.',
     image: 'expCallesNoche',
     motion: 'motionCallesNoche',
     sponsorId: 'patron',
@@ -132,7 +132,7 @@ export const experiences: Experience[] = [
     subtitle: 'Stop for Snacks',
     description: 'Authentic Mexican snacks from a street stand.',
     longDescription:
-      'Guests enjoy complimentary snacks from an authentic street stand — the perfect pause between pours.',
+      'Guests enjoy complimentary snacks from an authentic street stand. The perfect pause between pours.',
     image: 'expBotanas',
     duration: '10 min',
     map: { x: 0.552, y: 0.245 },
@@ -160,7 +160,7 @@ export const experiences: Experience[] = [
     subtitle: 'Portal to the Present Day',
     description: 'Discover the newest style of premium tequila.',
     longDescription:
-      'Portal back to the present day, where innovation has shaped tequila\'s future. A vibey, reflective lounge — and a full-circle moment reminding you that evolution is beautiful and should be celebrated.',
+      'Portal back to the present day, where innovation has shaped tequila\'s future. A vibey, reflective lounge and a full-circle moment reminding you that evolution is beautiful and should be celebrated.',
     pour: '4th sip',
     image: 'expCristalinoCantina',
     motion: 'motionCristalinoCantina',
@@ -176,7 +176,7 @@ export const experiences: Experience[] = [
     subtitle: 'Shop, Sip & Savor',
     description: 'Shop for tequila and Mexican crafts.',
     longDescription:
-      'An indoor / outdoor space filled with activations, music, art, food and cocktails. Pick up your shop reservations here — shop, sip and savor the moment.',
+      'An indoor / outdoor space filled with activations, music, art, food and cocktails. Pick up your shop reservations here, then shop, sip and savor the moment.',
     image: 'expMercado',
     duration: 'Open all day',
     map: { x: 0.693, y: 0.41 },

@@ -119,9 +119,9 @@ export class OpenRouterClient {
 export function toApiError(e: unknown): ApiError {
   if (e instanceof ApiError) return e;
   if (e instanceof AiUpstreamError && e.kind === 'refused') {
-    return new ApiError('AI_REFUSED', "The AI couldn't work with that image — try a different photo");
+    return new ApiError('AI_REFUSED', "The AI couldn't work with that image. Try a different photo");
   }
-  return new ApiError('AI_UNAVAILABLE', 'The Oracle is resting — please try again in a moment');
+  return new ApiError('AI_UNAVAILABLE', 'The Oracle is resting. Please try again in a moment');
 }
 
 /**

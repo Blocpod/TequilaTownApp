@@ -126,31 +126,31 @@ function notFound(cfg: Config, origin: string, path: string, what: string): Resp
   <p class="lede">${escapeHtml(what)}</p>
   <div class="btn-row">${storeLinks(cfg, origin)}<a class="btn btn-secondary" href="/">Back to Tequila Town</a></div>
 </section>`;
-  return html(renderShell({ title: 'Not found · Tequila Town', description: what, origin, path, body, noindex: true }), 404, 'public, max-age=60', undefined, true);
+  return html(renderShell({ title: 'Not found | Tequila Town', description: what, origin, path, body, noindex: true }), 404, 'public, max-age=60', undefined, true);
 }
 
 export async function renderMemoryPage(deps: ShareDeps, origin: string, id: string): Promise<Response> {
   const path = `/m/${id}`;
-  if (!MEMORY_ID_RE.test(id)) return notFound(deps.config, origin, path, 'This memory has faded — it may have been deleted by its owner.');
+  if (!MEMORY_ID_RE.test(id)) return notFound(deps.config, origin, path, 'This memory has faded. It may have been deleted by its owner.');
   const meta = await deps.store.ns('media').getMetadata(mediaKey('memories', id));
-  if (!meta) return notFound(deps.config, origin, path, 'This memory has faded — it may have been deleted by its owner.');
+  if (!meta) return notFound(deps.config, origin, path, 'This memory has faded. It may have been deleted by its owner.');
   const style = memoryStyles.find((s) => s.id === meta.style);
-  const styleLine = style ? `${style.name} · ${style.era}` : 'Vintage portrait';
+  const styleLine = style ? `${style.name}, ${style.era}` : 'Vintage portrait';
   const imageUrl = mediaUrl(origin, 'memories', id);
   const contentType = typeof meta.contentType === 'string' ? meta.contentType : undefined;
   const alt = `A ${style ? style.name.toLowerCase() : 'vintage'} portrait of a festival guest as a jimador harvesting agave`;
   const body = `<section class="share">
   <figure class="photo-frame">
     <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" width="800" height="1000">
-    <figcaption>${escapeHtml(styleLine)} — La Memoria Viva</figcaption>
+    <figcaption>La Memoria Viva: ${escapeHtml(styleLine)}</figcaption>
   </figure>
   <div>
     <p class="kicker">La Memoria Viva</p>
     <h1>Made at Tequila Town</h1>
-    <p class="lede">One guest, one selfie, one trip back in time — reimagined as a jimador in the agave fields of Jalisco.</p>
+    <p class="lede">One guest, one selfie, one trip back in time, reimagined as a jimador in the agave fields of Jalisco.</p>
     <p>Every portrait is made in the Tequila Town app at ${escapeHtml(festival.venue)}, ${escapeHtml(festival.dailyHours)} during the festival. Collect stamps, meet El Cantinero, and make a memory of your own.</p>
     <div class="btn-row">${storeLinks(deps.config, origin)}</div>
-    <p class="muted small mt">AI-generated image. ${festival.ageMinimum}+ only — please enjoy responsibly.</p>
+    <p class="muted small mt">AI-generated image. ${festival.ageMinimum}+ only. Please enjoy responsibly.</p>
   </div>
 </section>`;
   const page = renderShell({

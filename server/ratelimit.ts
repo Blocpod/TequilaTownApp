@@ -41,7 +41,7 @@ export class RateLimiter {
     e.count++;
     if (e.count > rule.limit) {
       const retry = Math.max(1, Math.ceil((e.resetAt - t) / 1000));
-      throw new ApiError('RATE_LIMITED', 'Too many requests — please slow down', {
+      throw new ApiError('RATE_LIMITED', 'Too many requests. Please slow down', {
         headers: { 'retry-after': String(retry) },
         details: { retryAfterSeconds: retry },
       });

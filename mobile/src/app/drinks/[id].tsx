@@ -130,7 +130,7 @@ export default function DrinkDetail() {
                     <Text style={styles.zoneName}>{z.name.toUpperCase()}</Text>
                     <Text variant="small">
                       Zone {z.zone}
-                      {z.pour ? ` · ${z.pour}` : ''}
+                      {z.pour ? `, ${z.pour}` : ''}
                     </Text>
                   </View>
                   <ArrowRight size={18} color={colors.ink} />

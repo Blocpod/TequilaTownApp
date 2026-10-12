@@ -6,8 +6,6 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { aiLimits } from '@shared/content/oracle';
-
 import { OracleEye } from '@/components/art/oracle-eye';
 import { PressCard } from '@/components/ui/card';
 import { Tag } from '@/components/ui/chip';
@@ -28,7 +26,7 @@ const FEATURES: Feature[] = [
     art: 'oracleMemoria',
     kicker: 'The Living Memory',
     title: 'La Memoria Viva',
-    body: 'Take a selfie — the Oracle returns you as a jimador in the 1870s, 1940s or 1950s.',
+    body: 'Take a selfie and the Oracle returns you as a jimador in the 1870s, 1940s or 1950s.',
     tag: 'Portrait studio',
   },
   {
@@ -76,11 +74,11 @@ export default function Oracle() {
             THE ORACLE
           </Text>
           <Text variant="body" color="rgba(243,233,210,0.72)" align="center" style={{ maxWidth: 320 }}>
-            Four ways to see Tequila Town through the agave’s eyes.
+            {"Four ways to see Tequila Town through the agave's eyes."}
           </Text>
           {signedIn && progress ? (
             <Text variant="small" color="rgba(243,233,210,0.55)" align="center" style={{ marginTop: 6 }}>
-              Today: {progress.ai.chat}/{aiLimits.chatMessages} messages · {progress.ai.memories}/{aiLimits.memories} portraits · {progress.ai.identify}/{aiLimits.identifications} scans
+              Left today: {progress.ai.chat} messages, {progress.ai.memories} portraits and {progress.ai.identify} bottle scans
             </Text>
           ) : null}
         </View>
@@ -126,7 +124,7 @@ export default function Oracle() {
             </Text>
             <Text variant="title">{progress?.persona ? progress.persona.title.toUpperCase() : 'WHO ARE YOU, AMIGO?'}</Text>
             <Text variant="small" color={colors.inkSoft}>
-              {progress?.persona ? progress.persona.archetype : 'Seven quick taps and the Oracle reads your spirit — your pours, your zones, your signature cocktail.'}
+              {progress?.persona ? progress.persona.archetype : 'Seven quick taps and the Oracle reads your spirit: your pours, your zones and your signature cocktail.'}
             </Text>
           </PressCard>
         </View>

@@ -35,7 +35,7 @@ export function MissionCard({ view }: { view: MissionView }) {
       <View style={styles.thumbWrap}>
         <Image source={img.source} placeholder={img.blurhash ? { blurhash: img.blurhash } : undefined} style={[styles.thumb, locked && { opacity: 0.35 }]} contentFit="cover" />
         <View style={[styles.status, { backgroundColor: done ? colors.agave : locked ? colors.inkMuted : colors.terracotta }]}>
-          {done ? <Check size={13} color={colors.card} strokeWidth={3} /> : locked ? <Lock size={12} color={colors.card} strokeWidth={2.6} /> : <Text style={styles.statusNum}>{zone?.zone ?? '★'}</Text>}
+          {done ? <Check size={13} color={colors.card} strokeWidth={3} /> : locked ? <Lock size={12} color={colors.card} strokeWidth={2.6} /> : <Text style={styles.statusNum}>{zone?.zone ?? ''}</Text>}
         </View>
       </View>
       <View style={{ flex: 1, gap: 3 }}>

@@ -89,7 +89,7 @@ export default function Bag() {
                       {l.product!.name}
                     </Text>
                     <Text variant="small">
-                      {l.size ? `Size ${l.size} · ` : ''}${l.product!.price} each
+                      {l.size ? `Size ${l.size}, ` : ''}${l.product!.price} each
                     </Text>
                     <Stepper compact value={l.qty} max={l.product!.limit} onChange={(v) => setQty(l.productId, l.size, v)} label={`${l.product!.name} quantity`} />
                   </View>
@@ -108,11 +108,11 @@ export default function Bag() {
               <>
                 <Button label="Reserve for pickup" icon={ShoppingBag} onPress={reserve} loading={busy} full />
                 <Text variant="small" align="center">
-                  Nothing is charged in the app — pay at the Mercado when you collect.
+                  Nothing is charged in the app. Pay at the Mercado when you collect.
                 </Text>
               </>
             ) : (
-              <SignInGate message="Sign in to reserve these for pickup — it takes ten seconds." />
+              <SignInGate message="Sign in to reserve these for pickup. It takes ten seconds." />
             )}
           </>
         )}

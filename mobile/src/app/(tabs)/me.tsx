@@ -83,7 +83,7 @@ export default function Me() {
                 ) : null}
                 {data ? (
                   <Text variant="lede" color={colors.terracotta} style={{ fontSize: 15 }}>
-                    Level {data.progress.level.level} · {data.progress.level.title} · {data.progress.points.toLocaleString()} pts
+                    Level {data.progress.level.level}, {data.progress.level.title}, {data.progress.points.toLocaleString()} pts
                   </Text>
                 ) : null}
               </View>
@@ -100,7 +100,7 @@ export default function Me() {
               <ListRow first icon={Images} label="My memories" detail="La Memoria Viva portraits" onPress={() => router.push('/oracle/gallery')} />
               <ListRow icon={Package} label="Shop reservations" detail="Pick up at the Mercado" onPress={() => router.push('/shop/orders')} />
               <ListRow icon={Wine} label="Saved tequilas" detail={`${data?.progress.bookmarks.length ?? 0} bookmarked`} onPress={() => router.push({ pathname: '/drinks', params: { saved: '1' } })} />
-              <ListRow icon={ScrollText} label={data?.progress.ritual ? 'Retake the Ritual' : 'Take the Ritual'} detail="Seven questions · reveals your agave persona" onPress={() => router.push('/ritual')} />
+              <ListRow icon={ScrollText} label={data?.progress.ritual ? 'Retake the Ritual' : 'Take the Ritual'} detail="Seven questions that reveal your agave persona" onPress={() => router.push('/ritual')} />
               <ListRow icon={BookOpen} label="Sponsors & stories" onPress={() => router.push('/sponsors')} />
             </PrintCard>
 
@@ -121,7 +121,7 @@ export default function Me() {
           </View>
         )}
         <Text variant="small" align="center" style={{ marginTop: 6 }}>
-          {festival.name} · v{APP_VERSION}
+          {festival.name} version {APP_VERSION}
           {'\n'}Please enjoy responsibly. {festival.ageMinimum}+ only.
         </Text>
       </ScrollView>

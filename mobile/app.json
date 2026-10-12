@@ -2,7 +2,7 @@
   "expo": {
     "name": "Tequila Town",
     "slug": "tequila-town",
-    "description": "Your passport to Tequila Town — the immersive agave experience. Explore twelve zones, collect stamps, claim your ticket, and meet the Oracle.",
+    "description": "Your passport to Tequila Town, the immersive agave experience. Explore twelve zones, collect stamps, claim your ticket, and meet the Oracle.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/app/icon.png",

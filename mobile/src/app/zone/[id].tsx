@@ -70,7 +70,7 @@ export default function ZoneDetail() {
         tone="glass"
         scrollY={scrollY}
         threshold={300}
-        right={<IconButton icon={Share2} tone="glass" label="Share this zone" onPress={() => shareText(`${zone.name} — ${zone.subtitle}. Zone ${zone.zone} of the Tequila Town journey 🌵`)} />}
+        right={<IconButton icon={Share2} tone="glass" label="Share this zone" onPress={() => shareText(`${zone.name}: ${zone.subtitle}. Zone ${zone.zone} of the Tequila Town journey 🌵`)} />}
       />
       <Animated.ScrollView onScroll={onScroll} scrollEventThrottle={16} contentContainerStyle={{ paddingBottom: insets.bottom + 40 }} showsVerticalScrollIndicator={false}>
         <ParallaxHero image={zone.motion ?? zone.image} height={400} scrollY={scrollY} />
@@ -121,7 +121,7 @@ export default function ZoneDetail() {
                 {poured.map((d) => (
                   <PressCard key={d.id} onPress={() => router.push({ pathname: '/drinks/[id]', params: { id: d.id } })} accessibilityLabel={`${d.name} by ${d.brand}`} style={{ width: 150 }} contentStyle={{ padding: 8, gap: 6 }}>
                     <Image source={artFor(d.image).source} style={styles.drinkImg} contentFit="cover" />
-                    <Text style={styles.drinkName} numberOfLines={1}>
+                    <Text style={styles.drinkName} numberOfLines={2}>
                       {d.name}
                     </Text>
                     <Text variant="small" numberOfLines={1}>
@@ -197,7 +197,8 @@ const styles = StyleSheet.create({
   dropCap: { fontFamily: fonts.serifBlack, fontSize: 44, lineHeight: 44, color: colors.terracotta },
   section: { gap: 10 },
   drinkImg: { width: '100%', height: 110, borderRadius: radii.sm },
-  drinkName: { fontFamily: fonts.display, fontSize: 15, lineHeight: 17, letterSpacing: 0.6, color: colors.ink, marginTop: 2 },
+  // Two lines so names wrap instead of truncating; minHeight keeps the cards level.
+  drinkName: { fontFamily: fonts.display, fontSize: 15, lineHeight: 17, minHeight: 34, letterSpacing: 0.6, color: colors.ink, marginTop: 2 },
   programRow: { flexDirection: 'row', gap: 14, paddingVertical: 10, borderBottomWidth: 1, borderColor: colors.inkFaint },
   programTime: { width: 72, fontFamily: fonts.serifBlack, fontSize: 15, color: colors.terracotta },
   sponsor: { flexDirection: 'row', alignItems: 'center', gap: 14, padding: 16 },

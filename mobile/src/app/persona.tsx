@@ -62,7 +62,7 @@ export default function Persona() {
 
   const pours = persona.recommendedDrinkIds.map(drinkById).filter(Boolean);
   const zones = persona.mustVisit.map(experienceById).filter(Boolean);
-  const share = () => shareText(`The Oracle says I'm “${persona.title}” — ${persona.archetype}. Find your agave persona at Tequila Town 🌵🥃`);
+  const share = () => shareText(`The Oracle says I'm ${persona.title}: ${persona.archetype}. Find your agave persona at Tequila Town 🌵🥃`);
 
   return (
     <View style={{ flex: 1 }}>
@@ -75,7 +75,7 @@ export default function Persona() {
 
         <View style={{ minHeight: 440 }}>
           <Animated.View style={[StyleSheet.absoluteFill, styles.cardBack, back]} pointerEvents="none">
-            <InkSeal size={180} color={colors.blush} label="TEQUILA TOWN" center="✦" />
+            <InkSeal size={180} color={colors.blush} label="TEQUILA TOWN" />
           </Animated.View>
           <Animated.View style={front}>
             <PrintCard background={colors.terracotta} shadowColor={colors.ink} offset={6} radius={radii.xl} contentStyle={styles.card}>
@@ -113,7 +113,7 @@ export default function Persona() {
                 <View style={{ flex: 1 }}>
                   <Text variant="subheading">{d!.name}</Text>
                   <Text variant="small">
-                    {d!.brand} · {d!.tastingNotes.slice(0, 3).join(', ')}
+                    {d!.brand}. Notes of {d!.tastingNotes.slice(0, 3).join(', ').toLowerCase()}
                   </Text>
                 </View>
               </PressCard>
@@ -132,7 +132,7 @@ export default function Persona() {
                 <View style={{ flex: 1 }}>
                   <Text style={styles.zoneName}>{z!.name.toUpperCase()}</Text>
                   <Text variant="small">
-                    Zone {z!.zone} · {z!.subtitle}
+                    Zone {z!.zone}: {z!.subtitle}
                   </Text>
                 </View>
               </PressCard>

@@ -101,7 +101,7 @@ export default function MissionScreen() {
     } catch (e) {
       if (isApiError(e) && e.code === 'WRONG_ANSWER') {
         haptic.error();
-        toast.error('Not quite', 'Give it another think — no penalty.');
+        toast.error('Not quite', 'Give it another think. No penalty.');
       } else if (isApiError(e) && e.code === 'LOCKED') {
         toast.error('Locked', 'Finish the required missions first.');
       } else {
@@ -152,7 +152,7 @@ export default function MissionScreen() {
         <View style={styles.body}>
           <View style={{ gap: 2 }}>
             <Text variant="lede" color={colors.terracotta}>
-              {zone ? `Zone ${zone.zone} · ${zone.name}` : 'The Grand Finale'}
+              {zone ? `Zone ${zone.zone}: ${zone.name}` : 'The Grand Finale'}
             </Text>
             <Text variant="display" accessibilityRole="header">
               {mission.name.toUpperCase()}

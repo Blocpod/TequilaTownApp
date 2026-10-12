@@ -109,7 +109,7 @@ export async function createMemory(ctx: Ctx): Promise<Response> {
         requestId: ctx.requestId,
         finish: completion.choices?.[0]?.finish_reason ?? null,
       });
-      throw new ApiError('AI_REFUSED', "The Oracle couldn't develop this one — try a clear, well-lit selfie");
+      throw new ApiError('AI_REFUSED', "The Oracle couldn't develop this one. Try a clear, well-lit selfie");
     }
   } catch (e) {
     await refundAi(svc, user.id, reservation);

@@ -46,7 +46,7 @@ function ZoneRow({ zone, stamped, index }: { zone: Experience; stamped: boolean;
             {zone.subtitle}
           </Text>
           <Text variant="small" numberOfLines={1}>
-            {[zone.pour, zone.duration, sponsor?.name].filter(Boolean).join(' · ')}
+            {[zone.pour, zone.duration, sponsor?.name].filter(Boolean).join(', ')}
           </Text>
         </View>
       </PressCard>
@@ -99,7 +99,7 @@ export default function Journey() {
           {!selected ? (
             <Animated.View entering={FadeInDown.delay(400)} style={[styles.hint, { bottom: TAB_BAR_SPACE + insets.bottom - 20 }]} pointerEvents="none">
               <Text variant="small" color={colors.inkSoft} align="center">
-                Pinch to zoom · tap a number to explore
+                Pinch to zoom, tap a number to explore
               </Text>
             </Animated.View>
           ) : (

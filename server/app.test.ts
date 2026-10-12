@@ -39,7 +39,7 @@ describe('HTTP plumbing', () => {
     h.store.data.get('progress')!.set(s.user.id, { data: '{not json', etag: '"x"', metadata: {} });
     const res = await call(h, 'GET', '/api/progress', { token: s.accessToken });
     expect(res.status).toBe(500);
-    expect(res.body).toEqual({ error: 'Something went wrong — please try again', code: 'SERVER_ERROR' });
+    expect(res.body).toEqual({ error: 'Something went wrong. Please try again', code: 'SERVER_ERROR' });
     expect(res.text).not.toContain('SyntaxError');
     expect(h.logs.some((l) => l.level === 'error' && l.msg === 'unhandled_error' && l.ctx?.userId === s.user.id)).toBe(true);
   });

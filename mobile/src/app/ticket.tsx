@@ -30,7 +30,7 @@ const TICKET_RE = /^[A-Z0-9-]{5,50}$/;
 const dateRange = () => {
   const s = new Date(festival.startDate);
   const e = new Date(festival.endDate);
-  return `${s.toLocaleString('en-US', { month: 'long' }).toUpperCase()} ${s.getDate()}–${e.getDate()}, ${e.getFullYear()}`;
+  return `${s.toLocaleString('en-US', { month: 'long' }).toUpperCase()} ${s.getDate()} TO ${e.getDate()}, ${e.getFullYear()}`;
 };
 
 /** Max brightness while the ticket QR is on screen (restored on blur). Window-level, so no permission needed. */
@@ -75,7 +75,7 @@ export default function TicketScreen() {
 
   const claim = async (raw: string) => {
     const c = raw.trim().toUpperCase();
-    if (!TICKET_RE.test(c)) return setError('Ticket codes are 5–50 letters, numbers or dashes.');
+    if (!TICKET_RE.test(c)) return setError('Ticket codes are 5 to 50 letters, numbers or hyphens.');
     setBusy(true);
     setError(null);
     try {
@@ -179,7 +179,7 @@ export default function TicketScreen() {
               <PrintCard contentStyle={{ padding: 20, gap: 14 }}>
                 <TicketIcon size={34} color={colors.terracotta} />
                 <Text variant="display">CLAIM YOUR TICKET</Text>
-                <Text variant="body">Scan the QR on your festival ticket — or type its code — to link it to your passport. You&apos;ll earn 100 points.</Text>
+                <Text variant="body">Scan the QR on your festival ticket, or type its code, to link it to your passport. You&apos;ll earn 100 points.</Text>
                 <Button label="Scan ticket" icon={ScanLine} onPress={() => router.push('/scan')} full />
                 <View style={styles.or}>
                   <View style={styles.rule} />

@@ -2,8 +2,8 @@ export type DrinkCategory = 'blanco' | 'reposado' | 'anejo' | 'extra_anejo' | 'c
 
 export const drinkCategories: { id: DrinkCategory; label: string; blurb: string; color: string }[] = [
   { id: 'blanco', label: 'Blanco', blurb: 'Unaged. Bright agave, citrus, pepper.', color: '#9DB8A0' },
-  { id: 'reposado', label: 'Reposado', blurb: 'Rested 2–12 months in oak. Vanilla, caramel.', color: '#D9A441' },
-  { id: 'anejo', label: 'Añejo', blurb: 'Aged 1–3 years. Honey, chocolate, dried fruit.', color: '#A8621E' },
+  { id: 'reposado', label: 'Reposado', blurb: 'Rested 2 to 12 months in oak. Vanilla, caramel.', color: '#D9A441' },
+  { id: 'anejo', label: 'Añejo', blurb: 'Aged 1 to 3 years. Honey, chocolate, dried fruit.', color: '#A8621E' },
   { id: 'extra_anejo', label: 'Extra Añejo', blurb: 'Aged 3+ years. Deep oak, tobacco, toffee.', color: '#6B3A1E' },
   { id: 'cristalino', label: 'Cristalino', blurb: 'Aged, then charcoal-filtered to clarity.', color: '#8FB7C6' },
   { id: 'cocktail', label: 'Cocktails', blurb: 'The house pours of Tequila Town.', color: '#E07A1F' },
@@ -29,7 +29,7 @@ export const drinks: Drink[] = [
     name: 'Tradicional Blanco',
     brand: 'Jose Cuervo',
     category: 'blanco',
-    description: 'The original silver tequila — pure and unaged with bright agave flavors.',
+    description: 'The original silver tequila, pure and unaged with bright agave flavors.',
     tastingNotes: ['Citrus', 'Pepper', 'Fresh Agave', 'Mineral'],
     abv: 40,
     price: 2,

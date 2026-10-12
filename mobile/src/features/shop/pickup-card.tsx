@@ -37,7 +37,7 @@ export function PickupCard({ order, showQr = true }: { order: Order; showQr?: bo
         {order.items.map((it, i) => (
           <View key={i} style={styles.item}>
             <Text variant="body" color={colors.ink} style={{ flex: 1 }}>
-              {it.qty} × {it.name}
+              {it.qty} {it.name}
               {it.size ? ` (${it.size})` : ''}
             </Text>
             <Text variant="bodyStrong">${(it.price * it.qty).toLocaleString()}</Text>

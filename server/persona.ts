@@ -1,12 +1,13 @@
 /**
  * Agave Persona: AI-written (JSON-schema structured output, validated against the
  * festival catalog) with a deterministic rules-based fallback, so completing the
- * Ritual ALWAYS yields a persona — even with no AI key, a timeout or bad output.
+ * Ritual ALWAYS yields a persona, even with no AI key, a timeout or bad output.
  */
 import type { AgavePersona } from '../shared/api';
 import { drinks, type Drink, type DrinkCategory } from '../shared/content/drinks';
 import { experiences } from '../shared/content/experiences';
 import { labelFor, type RitualAnswers } from '../shared/content/ritual';
+import { plainText } from '../shared/typography';
 import { jsonSchemaFormat, messageText, parseJsonObject } from './ai/openrouter';
 import { personaPrompt, personaSchema } from './ai/prompts';
 import { aiClient } from './ai/usage';
@@ -22,7 +23,7 @@ const PERSONA_TIMEOUT_MS = 25_000;
 
 const text = (v: unknown, max: number): string | null => {
   if (typeof v !== 'string') return null;
-  const s = v.trim().replace(/\s+/g, ' ');
+  const s = plainText(v).trim().replace(/\s+/g, ' ');
   return s && [...s].length <= max ? s : null;
 };
 

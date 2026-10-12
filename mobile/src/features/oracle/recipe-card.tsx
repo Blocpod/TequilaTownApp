@@ -14,7 +14,7 @@ import { colors, fonts } from '@/theme/tokens';
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
   const share = () =>
     shareText(
-      `${recipe.name}\n\n${recipe.ingredients.map((i) => `• ${i}`).join('\n')}\n\n${recipe.steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}${recipe.garnish ? `\n\nGarnish: ${recipe.garnish}` : ''}\n\n— El Cantinero, Tequila Town 🥃`,
+      `${recipe.name}\n\n${recipe.ingredients.map((i) => `- ${i}`).join('\n')}\n\n${recipe.steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}${recipe.garnish ? `\n\nGarnish: ${recipe.garnish}` : ''}\n\nFrom El Cantinero at Tequila Town 🥃`,
     );
   return (
     <Animated.View entering={FadeInUp.springify()}>
@@ -38,7 +38,7 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
         <Text variant="label">Ingredients</Text>
         {recipe.ingredients.map((ing, i) => (
           <View key={i} style={styles.row}>
-            <Text style={styles.dot}>✦</Text>
+            <View style={styles.dot} />
             <Text variant="body" color={colors.ink} style={{ flex: 1 }}>
               {ing}
             </Text>
@@ -68,7 +68,7 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
 export function RecipePending() {
   return (
     <PrintCard background={colors.cardWarm} offset={0} contentStyle={[styles.card, { gap: 8 }]}>
-      <Text variant="lede">Mixing your recipe…</Text>
+      <Text variant="lede">Mixing your recipe</Text>
       <Skeleton height={22} width="60%" />
       <Skeleton height={14} />
       <Skeleton height={14} width="80%" />
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
   glass: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 },
   rule: { height: 1.2, backgroundColor: colors.inkFaint, marginVertical: 8 },
   row: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
-  dot: { color: colors.terracotta, fontSize: 12, lineHeight: 23 },
+  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.terracotta, marginTop: 9 },
   num: { fontFamily: fonts.serifBlack, fontSize: 16, lineHeight: 23, color: colors.terracotta, minWidth: 14 },
 });

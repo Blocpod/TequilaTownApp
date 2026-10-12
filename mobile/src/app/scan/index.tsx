@@ -101,7 +101,7 @@ export default function Scan() {
         release(1800);
       }
     } catch (e) {
-      if (isApiError(e) && e.code === 'INVALID_CODE') toast.error("That's not the one", step ? `Find the QR for “${step.title}”.` : 'That code is not valid.');
+      if (isApiError(e) && e.code === 'INVALID_CODE') toast.error("That's not the one", step ? 'That code belongs to a different station.' : 'That code is not valid.');
       else if (isApiError(e) && e.code === 'LOCKED') toast.error('Mission locked', 'Complete the required missions first.');
       else toast.error('Scan failed', errorMessage(e));
       release(1800);
@@ -142,7 +142,7 @@ export default function Scan() {
 
       {!signedIn ? (
         <View style={styles.center}>
-          <SignInGate night message="Scanning collects mission steps and links your ticket — create a free passport to start." />
+          <SignInGate night message="Scanning collects mission steps and links your ticket. Create a free passport to start." />
         </View>
       ) : manual ? (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.center}>
@@ -161,7 +161,7 @@ export default function Scan() {
                 locked.current = false;
                 void handle(code.trim());
               }}
-              hint="Printed under every Tequila Town QR code — or your ticket code."
+              hint="Printed under every Tequila Town QR code. Your ticket code works too."
             />
             <Button
               label="Submit code"

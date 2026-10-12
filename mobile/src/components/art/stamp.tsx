@@ -9,8 +9,18 @@ import { Text } from '@/components/ui/text';
 import { art, artFor } from '@/theme/art';
 import { colors, fonts } from '@/theme/tokens';
 
-/** Circular rubber-stamp seal with curved lettering. */
-export function InkSeal({ size = 64, color = colors.terracotta, label = 'TEQUILA TOWN', center = '✦' }: { size?: number; color?: string; label?: string; center?: string }) {
+/** Five-point star path centred on (cx, cy). */
+function starPath(cx: number, cy: number, outer: number, inner = outer * 0.42) {
+  const pts = Array.from({ length: 10 }, (_, i) => {
+    const a = -Math.PI / 2 + (i * Math.PI) / 5;
+    const rad = i % 2 ? inner : outer;
+    return `${(cx + Math.cos(a) * rad).toFixed(2)},${(cy + Math.sin(a) * rad).toFixed(2)}`;
+  });
+  return `M${pts.join(' L')} Z`;
+}
+
+/** Circular rubber-stamp seal with curved lettering and a drawn star. */
+export function InkSeal({ size = 64, color = colors.terracotta, label = 'TEQUILA TOWN' }: { size?: number; color?: string; label?: string }) {
   const r = size / 2;
   const textR = r - 9;
   const ring = `M ${r},${r} m -${textR},0 a ${textR},${textR} 0 1,1 ${textR * 2},0 a ${textR},${textR} 0 1,1 -${textR * 2},0`;
@@ -23,12 +33,10 @@ export function InkSeal({ size = 64, color = colors.terracotta, label = 'TEQUILA
       <Circle cx={r} cy={r} r={r - 16} stroke={color} strokeWidth={1.2} fill="none" />
       <SvgText fill={color} fontSize={size * 0.12} fontWeight="700" letterSpacing={1.5}>
         <TextPath href="#ring" startOffset="0%">
-          {`${label} • ${label} •`}
+          {`${label}   ${label}   `}
         </TextPath>
       </SvgText>
-      <SvgText x={r} y={r + size * 0.08} fill={color} fontSize={size * 0.24} fontWeight="700" textAnchor="middle">
-        {center}
-      </SvgText>
+      <Path d={starPath(r, r, size * 0.14)} fill={color} />
     </Svg>
   );
 }
@@ -82,7 +90,7 @@ export function PassportStamp({ image, title, collected, width = 150, seed = 0, 
       </View>
       {collected ? (
         <Animated.View style={[styles.seal, { right: -width * 0.08, top: -width * 0.06 }, seal]} pointerEvents="none">
-          <InkSeal size={width * 0.48} color={sealColor} center="★" />
+          <InkSeal size={width * 0.48} color={sealColor} />
         </Animated.View>
       ) : null}
     </View>

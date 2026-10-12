@@ -48,7 +48,7 @@ export default function SponsorDetail() {
   const copy = async (code: string) => {
     await Clipboard.setStringAsync(code);
     haptic.success();
-    toast.success('Code copied', `${code} — show it at the Mercado.`);
+    toast.success('Code copied', `Show ${code} at the Mercado.`);
   };
 
   return (

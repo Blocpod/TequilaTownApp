@@ -116,7 +116,7 @@ export default function Home() {
         </View>
 
         <View style={styles.section}>
-          <PressCard onPress={() => router.push('/journey')} accessibilityLabel="The Experience — see all twelve zones" radius={radii.lg}>
+          <PressCard onPress={() => router.push('/journey')} accessibilityLabel="The Experience. See all twelve zones" radius={radii.lg}>
             <View style={{ height: 150 }}>
               <Image source={art.experienceHero.source} placeholder={{ blurhash: art.experienceHero.blurhash! }} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition="top" />
               <LinearGradient colors={['rgba(18,14,12,0.05)', 'rgba(18,14,12,0.55)']} style={StyleSheet.absoluteFill} />
@@ -191,7 +191,7 @@ export default function Home() {
             <IconButton icon={XGlyph} label="X" onPress={() => WebBrowser.openBrowserAsync(festival.socials.x)} />
           </View>
           <PressableScale onPress={() => router.push('/leaderboard')} accessibilityLabel="Leaderboard" style={{ alignSelf: 'center', marginTop: 10 }}>
-            <Text style={styles.footLink}>Leaderboard · Hall of Legends</Text>
+            <Text style={styles.footLink}>See the Hall of Legends</Text>
           </PressableScale>
         </View>
       </Animated.ScrollView>

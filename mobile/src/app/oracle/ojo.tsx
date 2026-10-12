@@ -31,7 +31,7 @@ import { useIsSignedIn } from '@/state/session';
 import { artFor } from '@/theme/art';
 import { colors, fonts, gutter, radii } from '@/theme/tokens';
 
-const confidenceCopy = { high: 'The Oracle is certain', medium: 'The Oracle is fairly sure', low: 'The Oracle squints…' } as const;
+const confidenceCopy = { high: 'The Oracle is certain', medium: 'The Oracle is fairly sure', low: 'The Oracle is guessing' } as const;
 
 export default function Ojo() {
   useNightStatusBar();
@@ -95,7 +95,7 @@ export default function Ojo() {
             The Eye
           </Text>
           <Text variant="display" color={colors.paper}>
-            {result ? (result.isTequila ? 'I SEE IT' : 'HMM…') : 'SHOW ME A BOTTLE'}
+            {result ? (result.isTequila ? 'I SEE IT' : 'HMM') : 'SHOW ME A BOTTLE'}
           </Text>
           {!result ? (
             <Text variant="body" color="rgba(243,233,210,0.75)">
@@ -115,7 +115,7 @@ export default function Ojo() {
               </View>
             </View>
             <Text variant="lede" color={colors.blush}>
-              Reading the label…
+              Reading the label
             </Text>
           </View>
         ) : result ? (
@@ -222,7 +222,7 @@ export default function Ojo() {
               <View style={{ width: 52 }} />
             </View>
             <Text variant="small" color="rgba(243,233,210,0.5)" align="center">
-              {progress?.ai.identify ?? aiLimits.identifications} scans left today · Photos are analyzed by our AI provider and not stored.
+              {progress?.ai.identify ?? aiLimits.identifications} scans left today. Photos are analyzed by our AI provider and not stored.
             </Text>
           </Animated.View>
         )}

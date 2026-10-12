@@ -33,7 +33,7 @@ export default function SignIn() {
       useSession.getState().setSession(session);
       toast.success(`¡Hola de nuevo, ${session.user.name.split(' ')[0]}!`);
     } catch (e) {
-      setError(isApiError(e) && e.code === 'INVALID_CREDENTIALS' ? 'That email and password don’t match.' : errorMessage(e));
+      setError(isApiError(e) && e.code === 'INVALID_CREDENTIALS' ? "That email and password don't match." : errorMessage(e));
     } finally {
       setBusy(false);
     }
@@ -74,7 +74,7 @@ export default function SignIn() {
         returnKeyType="go"
         onSubmitEditing={submit}
         error={error}
-        placeholder="••••••••"
+        placeholder="Your password"
       />
       {config?.passwordReset ? (
         <Text variant="small" style={styles.forgot} onPress={() => router.push('/auth/forgot')} accessibilityRole="link">

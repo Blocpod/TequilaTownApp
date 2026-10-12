@@ -102,7 +102,7 @@ export default function SettingsScreen() {
               Danger zone
             </Text>
             <PrintCard offset={0} borderColor={colors.danger} contentStyle={{ padding: 0 }}>
-              <ListRow first icon={Trash2} label={deleting ? 'Deleting…' : 'Delete account'} detail="Permanently remove your passport and all data" danger onPress={deleting ? undefined : deleteAccount} />
+              <ListRow first icon={Trash2} label={deleting ? 'Deleting' : 'Delete account'} detail="Permanently remove your passport and all data" danger onPress={deleting ? undefined : deleteAccount} />
             </PrintCard>
           </>
         ) : null}

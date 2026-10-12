@@ -1,4 +1,5 @@
 import type { Recipe } from '@shared/api';
+import { plainText } from '@shared/typography';
 import { Fragment } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -15,17 +16,32 @@ function isRecipe(v: unknown): v is Recipe {
   return !!r && typeof r.name === 'string' && Array.isArray(r.ingredients) && Array.isArray(r.steps);
 }
 
-/** Split assistant text into prose and `<recipe>{json}</recipe>` cards (tolerates a half-streamed block). */
+/** House style applied after JSON.parse, so a curly quote can never break the recipe JSON. */
+function cleanRecipe(r: Recipe): Recipe {
+  const opt = (s?: string) => (typeof s === 'string' ? plainText(s) : undefined);
+  return {
+    name: plainText(r.name),
+    glass: opt(r.glass),
+    ingredients: r.ingredients.map((i) => plainText(String(i))),
+    steps: r.steps.map((i) => plainText(String(i))),
+    garnish: opt(r.garnish),
+  };
+}
+
+/**
+ * Split assistant text into prose and `<recipe>{json}</recipe>` cards (tolerates a
+ * half-streamed block). Everything is run through the house-style `plainText`.
+ */
 export function parseSegments(content: string): Segment[] {
   const out: Segment[] = [];
   let rest = content;
   while (rest.length) {
     const start = rest.indexOf(OPEN);
     if (start === -1) {
-      out.push({ kind: 'text', text: rest });
+      out.push({ kind: 'text', text: plainText(rest) });
       break;
     }
-    if (start > 0) out.push({ kind: 'text', text: rest.slice(0, start) });
+    if (start > 0) out.push({ kind: 'text', text: plainText(rest.slice(0, start)) });
     const end = rest.indexOf(CLOSE, start);
     if (end === -1) {
       out.push({ kind: 'pending-recipe' });
@@ -34,7 +50,7 @@ export function parseSegments(content: string): Segment[] {
     const json = rest.slice(start + OPEN.length, end).trim();
     try {
       const parsed = JSON.parse(json);
-      if (isRecipe(parsed)) out.push({ kind: 'recipe', recipe: parsed });
+      if (isRecipe(parsed)) out.push({ kind: 'recipe', recipe: cleanRecipe(parsed) });
     } catch {
       /* malformed block: drop it rather than show raw JSON */
     }
@@ -90,7 +106,13 @@ export function RichText({ text, color = colors.paper }: { text: string; color?:
         if (bullet || numbered) {
           return (
             <View key={i} style={styles.li}>
-              <Text style={[styles.p, styles.marker, { color: colors.sun }]}>{bullet ? '•' : `${numbered![1]}.`}</Text>
+              {bullet ? (
+                <View style={styles.dotCell}>
+                  <View style={styles.dot} />
+                </View>
+              ) : (
+                <Text style={[styles.p, styles.marker, { color: colors.sun }]}>{`${numbered![1]}.`}</Text>
+              )}
               <Text style={[styles.p, { color, flex: 1 }]}>
                 <Inline text={(bullet ? bullet[1] : numbered![2]) ?? ''} color={color} />
               </Text>
@@ -111,4 +133,6 @@ const styles = StyleSheet.create({
   p: { fontFamily: fonts.sans, fontSize: 15.5, lineHeight: 23 },
   li: { flexDirection: 'row', gap: 8, paddingLeft: 2 },
   marker: { fontFamily: fonts.sansBold, minWidth: 16 },
+  dotCell: { minWidth: 16, height: 23, justifyContent: 'center' },
+  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.sun },
 });

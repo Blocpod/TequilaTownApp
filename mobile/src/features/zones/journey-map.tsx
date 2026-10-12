@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { Check } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -57,7 +58,7 @@ function Pin({ zone, mapW, mapH, scale, stamped, selected, onPress }: PinProps) 
         accessibilityLabel={`Zone ${zone.zone}, ${zone.name}${stamped ? ', stamped' : ''}`}
         style={[styles.pin, { backgroundColor: stamped ? colors.agave : selected ? colors.ink : zone.accent }]}
       >
-        <Text style={styles.pinText}>{stamped ? '✓' : zone.zone}</Text>
+        {stamped ? <Check size={18} color={colors.card} strokeWidth={3.2} /> : <Text style={styles.pinText}>{zone.zone}</Text>}
       </View>
     </Animated.View>
   );

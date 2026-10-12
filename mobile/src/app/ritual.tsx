@@ -76,7 +76,7 @@ export default function Ritual() {
         <Animated.View entering={FadeIn.duration(500)} style={{ alignItems: 'center', gap: 14 }}>
           <OracleEye size={190} />
           <Text variant="lede" color={colors.blush} align="center">
-            The Oracle is reading your spirit…
+            The Oracle is reading your spirit
           </Text>
           <Text variant="small" color="rgba(243,233,210,0.55)" align="center">
             Choosing your pours, your zones, your signature cocktail.
@@ -107,13 +107,13 @@ export default function Ritual() {
             <Text variant="lede" color={colors.terracotta}>
               The Tequila Town Ritual
             </Text>
-            <Text variant="body">Seven quick taps. The Oracle reads your answers and reveals your agave persona — and the pours you&apos;ll love.</Text>
+            <Text variant="body">Seven quick taps. The Oracle reads your answers and reveals your agave persona and the pours you&apos;ll love.</Text>
           </Animated.View>
         ) : null}
         <Animated.View key={q.id} entering={(dir > 0 ? SlideInRight : SlideInLeft).springify().damping(20)} exiting={(dir > 0 ? SlideOutLeft : SlideOutRight).duration(160)} style={{ gap: 16 }}>
           <Text variant="label">
             Question {step + 1} of {ritual.length}
-            {q.kind === 'multi' ? ` · choose up to ${q.max}` : ''}
+            {q.kind === 'multi' ? `, choose up to ${q.max}` : ''}
           </Text>
           <Text variant="heading" style={{ fontSize: 26, lineHeight: 32 }} accessibilityRole="header">
             {q.prompt}

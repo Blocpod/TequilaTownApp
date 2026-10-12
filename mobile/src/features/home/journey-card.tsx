@@ -61,7 +61,7 @@ export function JourneyCard() {
             <Text variant="label">Your passport</Text>
             <Text variant="title">{progress.level.title.toUpperCase()}</Text>
             <Text variant="body">
-              <Text variant="bodyStrong">{progress.points.toLocaleString()}</Text> pts ·{' '}
+              <Text variant="bodyStrong">{progress.points.toLocaleString()}</Text> pts,{' '}
               <Text variant="bodyStrong">
                 {stamps}/{missions.length}
               </Text>{' '}
@@ -70,7 +70,7 @@ export function JourneyCard() {
             {progress.level.next ? (
               <Text variant="small">{(progress.level.next - progress.points).toLocaleString()} pts to the next level</Text>
             ) : (
-              <Text variant="small">Maximum level — you are legend.</Text>
+              <Text variant="small">Maximum level. You are legend.</Text>
             )}
           </View>
         </PressableScale>
@@ -100,7 +100,7 @@ export function JourneyCard() {
           <View style={{ flex: 1 }}>
             <Text style={styles.ticketTitle}>CLAIM YOUR TICKET</Text>
             <Text variant="small" color={colors.inkSoft}>
-              Link your festival ticket · +100 pts
+              Link your festival ticket for 100 bonus points
             </Text>
           </View>
           <ArrowRight size={20} color={colors.ink} />

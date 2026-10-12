@@ -29,7 +29,7 @@ import { colors, fonts, gutter, radii } from '@/theme/tokens';
 
 type Stage = 'capture' | 'style' | 'developing' | 'result';
 
-const DEVELOPING = ['Pouring the developer…', 'Sharpening the coa…', 'Finding your agave field…', 'Waiting for golden hour…', 'Fixing the silver…', 'Almost dry…'];
+const DEVELOPING = ['Pouring the developer', 'Sharpening the coa', 'Finding your agave field', 'Waiting for golden hour', 'Fixing the silver', 'Almost dry'];
 
 function Developing({ photo }: { photo: string }) {
   const reduce = useReducedMotion();
@@ -58,7 +58,7 @@ function Developing({ photo }: { photo: string }) {
       </Text>
       <ProgressBar value={progress} color={colors.sun} track={colors.nightCard} style={{ width: '80%' }} />
       <Text variant="small" color="rgba(243,233,210,0.5)" align="center">
-        This takes 10–30 seconds. Keep the app open.
+        This takes 10 to 30 seconds. Keep the app open.
       </Text>
     </Animated.View>
   );
@@ -157,7 +157,7 @@ export default function Memoria() {
           </Text>
           {stage === 'capture' ? (
             <Text variant="body" color="rgba(243,233,210,0.75)">
-              Take a selfie and the Oracle returns you as a jimador harvesting agave — in tintype, wartime black & white, sepia or Kodachrome.
+              Take a selfie and the Oracle returns you as a jimador harvesting agave, in tintype, wartime black and white, sepia or Kodachrome.
             </Text>
           ) : null}
         </View>
@@ -196,7 +196,7 @@ export default function Memoria() {
               </PressableScale>
             </View>
             <Text variant="small" color="rgba(243,233,210,0.5)" align="center">
-              {remaining} of {aiLimits.memories} portraits left today · Your photo is sent to our AI image provider to create the portrait.
+              {remaining} of {aiLimits.memories} portraits left today. Your photo is sent to our AI image provider to create the portrait.
             </Text>
           </Animated.View>
         ) : stage === 'style' && photo ? (
@@ -249,7 +249,7 @@ export default function Memoria() {
             <PrintCard background={colors.cardWarm} shadowColor={colors.terracotta} offset={6} contentStyle={{ padding: 14, gap: 10 }}>
               <Image source={{ uri: memory.imageUrl }} style={{ width: '100%', aspectRatio: 4 / 5, borderRadius: radii.sm, backgroundColor: colors.paperDeep }} contentFit="cover" transition={600} />
               <Text variant="lede" align="center" style={{ fontSize: 15 }}>
-                La Memoria Viva · {styleMeta?.name} · {styleMeta?.era}
+                La Memoria Viva, {styleMeta?.name}, {styleMeta?.era}
               </Text>
             </PrintCard>
             <View style={{ flexDirection: 'row', gap: 10 }}>

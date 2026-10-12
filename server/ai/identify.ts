@@ -4,6 +4,7 @@
  */
 import type { Identification } from '../../shared/api';
 import { drinks } from '../../shared/content/drinks';
+import { plainText } from '../../shared/typography';
 import type { Ctx } from '../context';
 import { decodeImageUpload, json, MAX_JSON_BYTES, readJson } from '../http';
 import { RULES } from '../ratelimit';
@@ -17,7 +18,7 @@ const DRINK_IDS = new Set(drinks.map((d) => d.id));
 
 const str = (v: unknown, max: number): string | null => {
   if (typeof v !== 'string') return null;
-  const s = v.trim().replace(/\s+/g, ' ');
+  const s = plainText(v).trim().replace(/\s+/g, ' ');
   return s ? [...s].slice(0, max).join('') : null;
 };
 

@@ -98,7 +98,7 @@ export default function SignUp() {
         returnKeyType="go"
         onSubmitEditing={submit}
         hint="At least 8 characters."
-        placeholder="••••••••"
+        placeholder="Create a password"
       />
       {!pendingBirthDate ? (
         <View style={{ gap: 6 }}>
@@ -107,7 +107,7 @@ export default function SignUp() {
           </Text>
           <BirthDatePicker value={dob} onChange={setDob} />
           <Text variant="small" color={errors.dob ? colors.danger : colors.inkMuted}>
-            {errors.dob ?? 'Used only to confirm you are of legal drinking age — never stored.'}
+            {errors.dob ?? 'Used only to confirm you are of legal drinking age. It is never stored.'}
           </Text>
         </View>
       ) : null}

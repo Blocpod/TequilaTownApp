@@ -52,7 +52,7 @@ function Row({ e, index }: { e: LeaderboardEntry; index: number }) {
             {e.isYou ? `${e.name} (you)` : e.name}
           </Text>
           <Text variant="small">
-            Level {e.level} · {e.stamps} stamps
+            Level {e.level}, {e.stamps} stamps
           </Text>
         </View>
         <Text style={styles.pts}>{e.points.toLocaleString()}</Text>
@@ -106,7 +106,7 @@ export default function Leaderboard() {
                 Your rank
               </Text>
               <Text variant="small" color={colors.blush}>
-                Level {data.you.level} · {data.you.stamps} stamps
+                Level {data.you.level}, {data.you.stamps} stamps
               </Text>
             </View>
             <Text style={[styles.pts, { color: colors.paper }]}>{data.you.points.toLocaleString()}</Text>

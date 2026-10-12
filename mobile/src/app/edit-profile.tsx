@@ -2,7 +2,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
 import { Camera, ImagePlus, Phone, User } from 'lucide-react-native';
 import { useState } from 'react';
-import { ActionSheetIOS, Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { ActionSheetIOS, ActivityIndicator, Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Avatar } from '@/components/avatar';
@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { PressableScale } from '@/components/ui/pressable-scale';
 import { PaperBackground, TopBar } from '@/components/ui/screen';
 import { LoadingState } from '@/components/ui/states';
-import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
 import { toast } from '@/components/ui/toast';
 import { api, errorMessage } from '@/lib/api';
@@ -90,9 +89,9 @@ export default function EditProfile() {
           <View style={{ alignItems: 'center', gap: 10 }}>
             <PressableScale onPress={choosePhoto} accessibilityLabel="Change profile photo" disabled={uploading}>
               <Avatar name={user.name} url={user.avatarUrl} size={120} />
-              <View style={styles.cam}>{uploading ? <Text style={{ color: colors.card }}>…</Text> : <Camera size={18} color={colors.card} />}</View>
+              <View style={styles.cam}>{uploading ? <ActivityIndicator size="small" color={colors.card} /> : <Camera size={18} color={colors.card} />}</View>
             </PressableScale>
-            <Button label={uploading ? 'Uploading…' : 'Change photo'} icon={ImagePlus} variant="ghost" size="sm" onPress={choosePhoto} disabled={uploading} />
+            <Button label={uploading ? 'Uploading' : 'Change photo'} icon={ImagePlus} variant="ghost" size="sm" onPress={choosePhoto} disabled={uploading} />
           </View>
           <TextField label="Name" icon={User} value={name} onChangeText={setName} autoComplete="name" maxLength={60} />
           <TextField label="Phone (optional)" icon={Phone} value={phone} onChangeText={setPhone} keyboardType="phone-pad" autoComplete="tel" hint="Only used if the Mercado needs to reach you about a reservation." />

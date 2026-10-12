@@ -49,7 +49,7 @@ export default function ScanLink() {
   return (
     <View style={styles.backdrop}>
       {signedIn ? (
-        <AgaveLoader label="Reading the code…" />
+        <AgaveLoader label="Reading the code" />
       ) : (
         <SignInGate message="Sign in to collect this mission step with your passport." style={{ alignSelf: 'stretch' }} />
       )}

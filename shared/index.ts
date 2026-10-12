@@ -8,3 +8,4 @@ export * from './content/program';
 export * from './content/shop';
 export * from './content/ritual';
 export * from './content/oracle';
+export * from './typography';

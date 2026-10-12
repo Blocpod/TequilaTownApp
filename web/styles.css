@@ -326,6 +326,13 @@ h3 {
   gap: 0.5rem 1rem;
   align-items: center;
 }
+.meta-line .sep {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.45;
+}
 
 .features {
   display: grid;

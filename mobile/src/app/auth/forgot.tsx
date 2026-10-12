@@ -39,7 +39,7 @@ export default function Forgot() {
     try {
       const session = await api.resetPassword({ email: email.trim().toLowerCase(), code, password });
       useSession.getState().setSession(session);
-      toast.success('Password updated', 'You’re signed in.');
+      toast.success('Password updated', "You're signed in.");
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -52,7 +52,7 @@ export default function Forgot() {
       leading="back"
       kicker="No pasa nada"
       title="Reset password"
-      subtitle={step === 'email' ? 'We’ll email you a 6-digit code.' : `Enter the code we sent to ${email.trim()} and choose a new password.`}
+      subtitle={step === 'email' ? "We'll email you a 6-digit code." : `Enter the code we sent to ${email.trim()} and choose a new password.`}
     >
       {step === 'email' ? (
         <>

@@ -29,7 +29,7 @@ const friendly = (code: ErrorCode | string, fallback: string) => {
     case 'NOT_CONFIGURED':
       return 'The Oracle is resting right now. Try again in a moment.';
     case 'NETWORK':
-      return "Can't reach the Oracle — check your connection.";
+      return "Can't reach the Oracle. Check your connection.";
     default:
       return fallback;
   }
